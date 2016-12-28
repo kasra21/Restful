@@ -17,10 +17,10 @@ Install [polymer-cli]:
 
 ### Start the development server
 
-This command serves the app at `http://localhost:8080` and provides basic URL
+This command serves the app at `http://localhost:xxxx` (specified in the terminal) and provides basic URL
 routing for the app:
 
-    polymer serve --open
+    polymer serve
 
 
 ### Build
@@ -39,12 +39,12 @@ H2/push-compatible servers or to clients that do not support H2/Push.
 
 ### Preview the build
 
-This command serves the minified version of the app at `http://localhost:8080`
+This command serves the minified version of the app at `http://localhost:xxxx`
 in an unbundled state, as it would be served by a push-compatible server:
 
     polymer serve build/unbundled
 
-This command serves the minified version of the app at `http://localhost:8080`
+This command serves the minified version of the app at `http://localhost:xxxx`
 generated using fragment bundling:
 
     polymer serve build/bundled
