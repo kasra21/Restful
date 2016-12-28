@@ -1,4 +1,4 @@
-# Login and sign up Polymer App
+# Polymer UI
 
 This template is a starting point for building apps using a drawer-based
 layout. The layout is provided by `app-layout` elements of the Polymer App Toolbox - Starter Kit
