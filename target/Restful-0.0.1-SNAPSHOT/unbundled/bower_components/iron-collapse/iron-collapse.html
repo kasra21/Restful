@@ -1,0 +1,33 @@
+<html><head><link rel="import" href="../polymer/polymer.html">
+
+
+
+</head><body><dom-module id="iron-collapse">
+
+  <style>
+
+    :host {
+      display: block;
+      transition-duration: 300ms;
+    }
+
+    :host(.iron-collapse-closed) {
+      display: none;
+    }
+
+    :host(:not(.iron-collapse-opened)) {
+      overflow: hidden;
+    }
+
+  </style>
+
+  <template>
+
+    <content></content>
+
+  </template>
+
+</dom-module>
+
+<script>Polymer({is:"iron-collapse",properties:{horizontal:{type:Boolean,value:!1,observer:"_horizontalChanged"},opened:{type:Boolean,value:!1,notify:!0,observer:"_openedChanged"}},hostAttributes:{role:"group","aria-expanded":"false"},listeners:{transitionend:"_transitionEnd"},ready:function(){this._enableTransition=!0},toggle:function(){this.opened=!this.opened},show:function(){this.opened=!0},hide:function(){this.opened=!1},updateSize:function(e,t){this.enableTransition(t);var i=this.style,n=i[this.dimension]===e;i[this.dimension]=e,t&&n&&this._transitionEnd()},enableTransition:function(e){this.style.transitionDuration=e&&this._enableTransition?"":"0s"},_horizontalChanged:function(){this.dimension=this.horizontal?"width":"height",this.style.transitionProperty=this.dimension},_openedChanged:function(){if(this.opened){this.setAttribute("aria-expanded","true"),this.setAttribute("aria-hidden","false"),this.toggleClass("iron-collapse-closed",!1),this.updateSize("auto",!1);var e=this._calcSize();this.updateSize("0px",!1),this.offsetHeight,this.updateSize(e,!0),this.focus()}else this.setAttribute("aria-expanded","false"),this.setAttribute("aria-hidden","true"),this.toggleClass("iron-collapse-opened",!1),this.updateSize(this._calcSize(),!1),this.offsetHeight,this.updateSize("0px",!0)},_transitionEnd:function(){this.opened&&this.updateSize("auto",!1),this.toggleClass("iron-collapse-closed",!this.opened),this.toggleClass("iron-collapse-opened",this.opened),this.enableTransition(!1)},_calcSize:function(){return this.getBoundingClientRect()[this.dimension]+"px"}});</script>
+</body></html>

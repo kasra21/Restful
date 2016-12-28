@@ -1,0 +1,85 @@
+<link rel="import" href="my-imports.html">
+
+<dom-module id="my-view">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      
+      #userInput {
+        width: 280px;
+      }
+      
+      #submitBtn {
+        box-shadow: 1px 1px 1px grey;
+      }
+    </style>
+    
+    <iron-ajax
+        id="ajaxPost"
+        url="http://localhost:8080/Restful/rest/json/letters/reverseValidateLetters"
+        method="POST"
+        content-type="application/json"
+        handle-as="json"
+        on-response="_handleAjaxPostResponse"
+        on-error="_handleAjaxPostError"
+        ></iron-ajax>
+
+    <div class="card">
+      <h1>Text Field View</h1>
+      <form is="iron-form" id="form">
+        <paper-input name="letters" id="userInput" always-float-label="true" label="User Input" required></paper-input>
+        <br>
+      </form>
+      <paper-button raised id="submitBtn" on-tap="_onSubmitButtonTap"> Submit </paper-button>
+    </div>
+    
+    <paper-dialog id="statusDialog">
+      <h2>Status Dialog</h2>
+      <p>{{dialogMsg}}</p>
+	  <div class="buttons">
+	    <paper-button dialog-confirm autofocus>Close</paper-button>
+	  </div>
+	</paper-dialog>
+    
+  </template>
+
+  <script>
+
+    Polymer({
+      is: 'my-view',
+      
+      _onSubmitButtonTap: function(){
+        value = this.$.userInput.value;
+        if(value == ""){
+          this.$.userInput.invalid = true;
+          this.$.userInput.errorMessage = "Required";
+        }
+        else if( !(/^[a-zA-Z]+$/.test(value)) ){
+          this.$.userInput.invalid = true;
+          this.$.userInput.errorMessage = "Only a-zA-Z are allowed in text field";
+        }
+        else{
+          this.$.ajaxPost.body = { "value": value };
+          this.$.ajaxPost.generateRequest();
+          this.$.form.submit();
+        }
+      },
+      
+      _handleAjaxPostResponse: function(){
+        this.dialogMsg = "success: " + this.$.ajaxPost.lastResponse.success + " - And Final output:" + this.$.ajaxPost.lastResponse.value;
+        this.$.statusDialog.open();
+      },
+      
+      _handleAjaxPostError: function(){
+        this.dialogMsg = "not success";
+        this.$.statusDialog.open();
+      }
+      
+      
+    });
+    
+  </script>
+</dom-module>

@@ -1,0 +1,34 @@
+<html><head><link rel="import" href="my-imports.html">
+
+</head><body><dom-module id="my-view">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        padding: 10px;
+      }
+      
+      #userInput {
+        width: 280px;
+      }
+      
+      #submitBtn {
+        box-shadow: 1px 1px 1px grey;
+      }
+    </style>
+    
+    <iron-ajax id="ajaxPost" url="rest/json/letters/reverseValidateLetters" method="POST" content-type="application/json" handle-as="json" on-response="_handleAjaxPostResponse" on-error="_handleAjaxPostError"></iron-ajax>
+
+    <div class="card">
+      <h1>Text Field View</h1>
+      <form is="iron-form" id="form">
+        <paper-input name="letters" id="userInput" always-float-label="true" label="User Input" required=""></paper-input>
+        <br>
+      </form>
+      <paper-button raised="" id="submitBtn" on-tap="_onSubmitButtonTap"> Submit </paper-button>
+    </div>
+  </template>
+
+  <script>Polymer({is:"my-view",_onSubmitButtonTap:function(){value=this.$.userInput.value,parsedVal='"'+value+'"',""==value?(this.$.userInput.invalid=!0,this.$.userInput.errorMessage="Required"):/^[a-zA-Z]+$/.test(value)?(this.$.ajaxPost.body={value:parsedVal},this.$.ajaxPost.generateRequest()):(this.$.userInput.invalid=!0,this.$.userInput.errorMessage="Only a-zA-Z are allowed in text field")},_handleAjaxPostResponse:function(){this.$.form.submit(),alert("success")},_handleAjaxPostError:function(){alert("not success")}});</script>
+</dom-module>
+</body></html>

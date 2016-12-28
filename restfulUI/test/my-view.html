@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>my-view</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+
+    <!-- Import the element to test -->
+    <link rel="import" href="../src/my-view.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <my-view></my-view>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('my-view tests', function() {
+        var home;
+
+        setup(function() {
+          home = fixture('basic');
+        });
+
+        test('Should show the input for user s input', function() {
+          
+          var input = Polymer.dom(home.root).querySelector('#userInput');
+          assert.equal(input.label, 'User Input');
+          
+        });
+      });
+    </script>
+  </body>
+</html>
