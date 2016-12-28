@@ -9,9 +9,11 @@ IMPORTANT: try to only use eclipse to clone, launch and deploy as no other metho
 The project has only be set with help of eclipse so far:
 
 * **Clone The project**: 
+
 [![clone](https://github.com/kasra21/Restful/raw/master/screenshots/clone.png)](#features)
 
 * **Deploy on a Server**: it must be ready to be deployed and "run on a server"
+
 [![deploy](https://github.com/kasra21/Restful/raw/master/screenshots/deploy.png)](#features)
 [![deploy2](https://github.com/kasra21/Restful/raw/master/screenshots/deploy2.png)](#features)
 
@@ -27,6 +29,7 @@ You may also use postman or an equivalent method to call the rest api's such as:
 	}
 
 * **Unit Test**: The project contains some unit tests that can be used:
+
 [![junit](https://github.com/kasra21/Restful/raw/master/screenshots/junit.png)](#features)
 
 Don't forget to check the polymer UI directory (has its own README). If the polymer needs to communicate with the localhost:8080 make sure to modify the "Access-Control-Allow-Origin" of the server that the java code is running on
